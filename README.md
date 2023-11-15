@@ -1,2 +1,2 @@
-# etiqaassesment
+# etiqaassessment
 Assessment for Etiqa
