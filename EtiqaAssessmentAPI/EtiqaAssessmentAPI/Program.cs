@@ -4,10 +4,17 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(o => o.AddPolicy("AcceptAllPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 
 var connection = String.Empty;
 //if (builder.Environment.IsDevelopment())
@@ -67,6 +74,9 @@ app.MapDelete("/User", (int id, UserDbContext context) =>
 })
 .WithName("Delete")
 .WithOpenApi();
+
+
+app.UseCors("AcceptAllPolicy");
 
 app.Run();
 
